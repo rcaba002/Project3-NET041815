@@ -1,4 +1,4 @@
-# Project 2
+# Project 3
 ## Survival Store
 
 You work as a developer for a company that sells emergency supplies and they've decided to build a virtual store. For some reason, all of their users are still stuck using MS-DOS, so you'll need to design the application for a text-based interface. Using the inventory list in the `resources` folder, create an application that supports the following user stories:
