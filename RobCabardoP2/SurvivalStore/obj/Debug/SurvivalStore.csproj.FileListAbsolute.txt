@@ -1,0 +1,13 @@
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\bin\Debug\SurvivalStore.exe.config
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\obj\Debug\SurvivalStore.csprojResolveAssemblyReference.cache
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\bin\Debug\SurvivalStore.exe
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\bin\Debug\SurvivalStore.pdb
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\bin\Debug\LinqToExcel.dll
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\bin\Debug\log4net.dll
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\bin\Debug\Remotion.Data.Linq.dll
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\bin\Debug\Remotion.dll
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\bin\Debug\Remotion.Interfaces.dll
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\bin\Debug\LinqToExcel.xml
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\bin\Debug\log4net.xml
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\obj\Debug\SurvivalStore.exe
+C:\Work\Claim\Project3-NET041815\RobCabardoP2\SurvivalStore\obj\Debug\SurvivalStore.pdb
