@@ -13,10 +13,13 @@ namespace SurvivalStore
         {
             List<ShoppingCart> cart = new List<ShoppingCart>();
 
-            MainMenu(ref cart);
+            Random rand = new Random();
+            int balance = rand.Next(1000, 3000);
+
+            MainMenu(ref cart, ref balance);
         }
 
-        public static void MainMenu(ref List<ShoppingCart> cart)
+        public static void MainMenu(ref List<ShoppingCart> cart, ref int balance)
         {
             Console.WriteLine("Main Menu");
             Console.WriteLine("------------------");
@@ -33,17 +36,17 @@ namespace SurvivalStore
             if (userInput == "V")
             {
                 Console.Clear();
-                Products.Menu(ref cart);
+                Products.Menu(ref cart, ref balance);
             }
             else if (userInput == "S")
             {
                 Console.Clear();
-                ShoppingCart.Menu(ref cart);
+                ShoppingCart.Menu(ref cart, ref balance);
             }
             else if (userInput == "W")
             {
                 Console.Clear();
-                Wallet.Menu(ref cart);
+                Wallet.Menu(ref cart, ref balance);
             }
             else if (userInput == "E")
                 Environment.Exit(0);
@@ -54,7 +57,7 @@ namespace SurvivalStore
                 Console.WriteLine("The term '" + userInput + "' is not recognized.");
                 Console.ResetColor();
                 Console.WriteLine();
-                MainMenu(ref cart);
+                MainMenu(ref cart, ref balance);
             }
         }
     }
@@ -69,7 +72,7 @@ namespace SurvivalStore
 
         public static string additionalFilter;
 
-        public static void Menu(ref List<ShoppingCart> cart)
+        public static void Menu(ref List<ShoppingCart> cart, ref int balance)
         {
             Console.WriteLine("Product Menu");
             Console.WriteLine("------------------");
@@ -88,31 +91,31 @@ namespace SurvivalStore
             if (userInput == "V")
             {
                 Console.Clear();
-                sortByAll(ref cart);
+                sortByAll(ref cart, ref balance);
             }
             else if (userInput == "N")
             {
                 Console.Clear();
-                sortByName(ref cart);
+                sortByName(ref cart, ref balance);
             }
             else if (userInput == "C")
             {
                 Console.Clear();
-                CategoryMenu(ref cart);
+                CategoryMenu(ref cart, ref balance);
             }
             else if (userInput == "P")
             {
                 Console.Clear();
-                sortByPrice(ref cart);
+                sortByPrice(ref cart, ref balance);
             }
             else if (userInput == "A")
             {
-                ShoppingCart.addProductMenu(ref cart);
+                ShoppingCart.addProductMenu(ref cart, ref balance);
             }
             else if (userInput == "M")
             {
                 Console.Clear();
-                Program.MainMenu(ref cart);
+                Program.MainMenu(ref cart, ref balance);
             }
             else
             {
@@ -121,11 +124,11 @@ namespace SurvivalStore
                 Console.WriteLine("The term '" + userInput + "' is not recognized.");
                 Console.ResetColor();
                 Console.WriteLine();
-                Menu(ref cart);
+                Menu(ref cart, ref balance);
             }
         }
 
-        public static void CategoryMenu(ref List<ShoppingCart> cart)
+        public static void CategoryMenu(ref List<ShoppingCart> cart, ref int balance)
         {
             Console.WriteLine("Product Sort Menu");
             Console.WriteLine("------------------");
@@ -145,72 +148,72 @@ namespace SurvivalStore
             {
                 Console.Clear();
                 additionalFilter = "F";
-                sortByCategory("food", ref cart);
+                sortByCategory("food", ref cart, ref balance);
             }
             else if (userInput == "T")
             {
                 Console.Clear();
                 additionalFilter = "T";
-                sortByCategory("tools and supplies", ref cart);
+                sortByCategory("tools and supplies", ref cart, ref balance);
             }
             else if (userInput == "M")
             {
                 Console.Clear();
                 additionalFilter = "M";
-                sortByCategory("first aid and medical", ref cart);
+                sortByCategory("first aid and medical", ref cart, ref balance);
             }
             else if (userInput == "W")
             {
                 Console.Clear();
                 additionalFilter = "W";
-                sortByCategory("warmth and shelter", ref cart);
+                sortByCategory("warmth and shelter", ref cart, ref balance);
             }
             else if (userInput == "C")
             {
                 Console.Clear();
                 additionalFilter = "C";
-                sortByCategory("clothing", ref cart);
+                sortByCategory("clothing", ref cart, ref balance);
             }
             else if (userInput == "O")
             {
                 Console.Clear();
                 additionalFilter = "O";
-                sortByCategory("cooking and fuel", ref cart);
+                sortByCategory("cooking and fuel", ref cart, ref balance);
             }
             else if (userInput == "H")
             {
                 Console.Clear();
                 additionalFilter = "H";
-                sortByCategory("sanitation and hygiene", ref cart);
+                sortByCategory("sanitation and hygiene", ref cart, ref balance);
             }
             else if (userInput == "S")
             {
                 Console.Clear();
                 additionalFilter = "S";
-                sortByCategory("survival kits", ref cart);
+                sortByCategory("survival kits", ref cart, ref balance);
             }
             else if (userInput == "L")
             {
                 Console.Clear();
                 additionalFilter = "L";
-                sortByCategory("light and communication", ref cart);
+                sortByCategory("light and communication", ref cart, ref balance);
             }
             else if (userInput == "B")
             {
                 Console.Clear();
                 additionalFilter = "B";
-                sortByCategory("backpacks", ref cart);
+                sortByCategory("backpacks", ref cart, ref balance);
             }
             else if (userInput == "E")
             {
                 Console.Clear();
                 additionalFilter = "E";
-                sortByCategory("emergency power", ref cart);
+                sortByCategory("emergency power", ref cart, ref balance);
             }
             else if (userInput == "G")
             {
                 Console.Clear();
-                Menu(ref cart);
+                Menu(ref cart, ref balance);
             }
             else
             {
@@ -218,11 +221,11 @@ namespace SurvivalStore
                 Console.WriteLine("The term '" + userInput + "' is not recognized.");
                 Console.ResetColor();
                 Console.WriteLine();
-                CategoryMenu(ref cart);
+                CategoryMenu(ref cart, ref balance);
             }
         }
 
-        public static void additionalSortMenu(ref List<ShoppingCart> cart)
+        public static void additionalSortMenu(ref List<ShoppingCart> cart, ref int balance)
         {
             Console.WriteLine("Additional Sort");
             Console.WriteLine("------------------");
@@ -241,57 +244,57 @@ namespace SurvivalStore
                 if (additionalFilter == "F")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("food", ref cart);
+                    sortByCategoryWithName("food", ref cart, ref balance);
                 }
                 else if (additionalFilter == "T")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("tools and supplies", ref cart);
+                    sortByCategoryWithName("tools and supplies", ref cart, ref balance);
                 }
                 else if (additionalFilter == "M")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("first aid and medical", ref cart);
+                    sortByCategoryWithName("first aid and medical", ref cart, ref balance);
                 }
                 else if (additionalFilter == "W")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("warmth and shelter", ref cart);
+                    sortByCategoryWithName("warmth and shelter", ref cart, ref balance);
                 }
                 else if (additionalFilter == "C")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("clothing", ref cart);
+                    sortByCategoryWithName("clothing", ref cart, ref balance);
                 }
                 else if (additionalFilter == "O")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("cooking and fuel", ref cart);
+                    sortByCategoryWithName("cooking and fuel", ref cart, ref balance);
                 }
                 else if (additionalFilter == "H")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("sanitation and hygiene", ref cart);
+                    sortByCategoryWithName("sanitation and hygiene", ref cart, ref balance);
                 }
                 else if (additionalFilter == "S")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("survival kits", ref cart);
+                    sortByCategoryWithName("survival kits", ref cart, ref balance);
                 }
                 else if (additionalFilter == "L")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("light and communication", ref cart);
+                    sortByCategoryWithName("light and communication", ref cart, ref balance);
                 }
                 else if (additionalFilter == "B")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("backpack", ref cart);
+                    sortByCategoryWithName("backpack", ref cart, ref balance);
                 }
                 else if (additionalFilter == "E")
                 {
                     Console.Clear();
-                    sortByCategoryWithName("emergency power", ref cart);
+                    sortByCategoryWithName("emergency power", ref cart, ref balance);
                 }
             }
             else if (userInput == "P")
@@ -299,65 +302,65 @@ namespace SurvivalStore
                 if (additionalFilter == "F")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("food", ref cart);
+                    sortByCategoryWithPrice("food", ref cart, ref balance);
                 }
                 else if (additionalFilter == "T")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("tools and supplies", ref cart);
+                    sortByCategoryWithPrice("tools and supplies", ref cart, ref balance);
                 }
                 else if (additionalFilter == "M")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("first aid and medical", ref cart);
+                    sortByCategoryWithPrice("first aid and medical", ref cart, ref balance);
                 }
                 else if (additionalFilter == "W")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("warmth and shelter", ref cart);
+                    sortByCategoryWithPrice("warmth and shelter", ref cart, ref balance);
                 }
                 else if (additionalFilter == "C")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("clothing", ref cart);
+                    sortByCategoryWithPrice("clothing", ref cart, ref balance);
                 }
                 else if (additionalFilter == "O")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("cooking and fuel", ref cart);
+                    sortByCategoryWithPrice("cooking and fuel", ref cart, ref balance);
                 }
                 else if (additionalFilter == "H")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("sanitation and hygiene", ref cart);
+                    sortByCategoryWithPrice("sanitation and hygiene", ref cart, ref balance);
                 }
                 else if (additionalFilter == "S")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("survival kits", ref cart);
+                    sortByCategoryWithPrice("survival kits", ref cart, ref balance);
                 }
                 else if (additionalFilter == "L")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("light and communication", ref cart);
+                    sortByCategoryWithPrice("light and communication", ref cart, ref balance);
                 }
                 else if (additionalFilter == "B")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("backpack", ref cart);
+                    sortByCategoryWithPrice("backpack", ref cart, ref balance);
                 }
                 else if (additionalFilter == "E")
                 {
                     Console.Clear();
-                    sortByCategoryWithPrice("emergency power", ref cart);
+                    sortByCategoryWithPrice("emergency power", ref cart, ref balance);
                 }
             }
             else if (userInput == "A")
-                ShoppingCart.addProductMenu(ref cart);
+                ShoppingCart.addProductMenu(ref cart, ref balance);
             else if (userInput == "G")
             {
                 Console.Clear();
-                Menu(ref cart);
+                Menu(ref cart, ref balance);
             }
             else
             {
@@ -365,11 +368,11 @@ namespace SurvivalStore
                 Console.WriteLine("The term '" + userInput + "' is not recognized.");
                 Console.ResetColor();
                 Console.WriteLine();
-                additionalSortMenu(ref cart);
+                additionalSortMenu(ref cart, ref balance);
             }
         }
 
-        public static void sortByAll(ref List<ShoppingCart> cart)
+        public static void sortByAll(ref List<ShoppingCart> cart, ref int balance)
         {
             var excelFile = new ExcelQueryFactory("" + @"C:\Work\Claim\Project3-NET041815\resources\survival_store_inventory.xlsx");
             var productList = from a in excelFile.Worksheet<Products>("survival_store_inventory") select a;
@@ -378,6 +381,7 @@ namespace SurvivalStore
             {
                 Console.WriteLine("Name: {0}", a.name);
                 Console.WriteLine("Product ID: {0}", Convert.ToInt32(a.product_ID));
+                Console.WriteLine("Price: {0:C2}", a.price);
 
                 if (Convert.ToInt32(a.num_in_stock) != 0)
                     Console.WriteLine("Item In Stock");
@@ -385,10 +389,10 @@ namespace SurvivalStore
                 Console.WriteLine();
             }
 
-            Menu(ref cart);
+            Menu(ref cart, ref balance);
         }
 
-        public static void sortByName(ref List<ShoppingCart> cart)
+        public static void sortByName(ref List<ShoppingCart> cart, ref int balance)
         {
             var excelFile = new ExcelQueryFactory("" + @"C:\Work\Claim\Project3-NET041815\resources\survival_store_inventory.xlsx");
             var productList = from a in excelFile.Worksheet<Products>("survival_store_inventory").OrderBy(x => x.name).ToList() select a;
@@ -407,10 +411,10 @@ namespace SurvivalStore
                 Console.WriteLine();
             }
 
-            Menu(ref cart);
+            Menu(ref cart, ref balance);
         }
 
-        public static void sortByPrice(ref List<ShoppingCart> cart)
+        public static void sortByPrice(ref List<ShoppingCart> cart, ref int balance)
         {
             var excelFile = new ExcelQueryFactory("" + @"C:\Work\Claim\Project3-NET041815\resources\survival_store_inventory.xlsx");
             var productList = from a in excelFile.Worksheet<Products>("survival_store_inventory").OrderBy(x => x.price).ToList() select a;
@@ -430,10 +434,10 @@ namespace SurvivalStore
                 Console.WriteLine();
             }
 
-            Menu(ref cart);
+            Menu(ref cart, ref balance);
         }
 
-        public static void sortByCategory(string input, ref List<ShoppingCart> cart)
+        public static void sortByCategory(string input, ref List<ShoppingCart> cart, ref int balance)
         {
             var excelFile = new ExcelQueryFactory("" + @"C:\Work\Claim\Project3-NET041815\resources\survival_store_inventory.xlsx");
             var productList = from a in excelFile.Worksheet<Products>("survival_store_inventory") select a;
@@ -457,10 +461,10 @@ namespace SurvivalStore
                 }
             }
 
-            additionalSortMenu(ref cart);
+            additionalSortMenu(ref cart, ref balance);
         }
 
-        public static void sortByCategoryWithName(string input, ref List<ShoppingCart> cart)
+        public static void sortByCategoryWithName(string input, ref List<ShoppingCart> cart, ref int balance)
         {
             var excelFile = new ExcelQueryFactory("" + @"C:\Work\Claim\Project3-NET041815\resources\survival_store_inventory.xlsx");
             var productList = from a in excelFile.Worksheet<Products>("survival_store_inventory").OrderBy(x => x.name).ToList() select a;
@@ -483,10 +487,10 @@ namespace SurvivalStore
                 }
             }
 
-            Menu(ref cart);
+            Menu(ref cart, ref balance);
         }
 
-        public static void sortByCategoryWithPrice(string input, ref List<ShoppingCart> cart)
+        public static void sortByCategoryWithPrice(string input, ref List<ShoppingCart> cart, ref int balance)
         {
             var excelFile = new ExcelQueryFactory("" + @"C:\Work\Claim\Project3-NET041815\resources\survival_store_inventory.xlsx");
             var productList = from a in excelFile.Worksheet<Products>("survival_store_inventory").OrderBy(x => x.price).ToList() select a;
@@ -509,22 +513,63 @@ namespace SurvivalStore
                 }
             }
 
-            Menu(ref cart);
+            Menu(ref cart, ref balance);
         }
     }
 
     class Wallet
     {
-        public static void Menu(ref List<ShoppingCart> cart)
+        public static void Menu(ref List<ShoppingCart> cart, ref int balance)
         {
-            Random rand = new Random();
-            int balance = rand.Next(500,2000);
-
             Console.WriteLine("BofA Core Checking - 4419");
             Console.WriteLine("{0:C2}", balance);
             Console.WriteLine();
 
-            Program.MainMenu(ref cart);
+            Console.WriteLine("Wallet Menu");
+            Console.WriteLine("------------------");
+            Console.WriteLine("P - Purchase Items In Cart");
+            Console.WriteLine("V - View Cart");
+            Console.WriteLine("R - Remove Items");
+            Console.WriteLine("A - Add Items");
+            Console.WriteLine("M - Main Menu");
+            Console.WriteLine();
+            Console.Write("C:\\> ");
+
+            string userInput = Console.ReadLine().ToUpper();
+            Console.WriteLine();
+
+            if (userInput == "P")
+            {
+            }
+            else if (userInput == "V")
+            {
+                Console.Clear();
+                ShoppingCart.Menu(ref cart, ref balance);
+            }
+            else if (userInput == "R")
+            {
+                Console.Clear();
+                ShoppingCart.Menu(ref cart, ref balance);
+            }
+            else if (userInput == "A")
+            {
+                Console.Clear();
+                Products.Menu(ref cart, ref balance);
+            }
+            else if (userInput == "M")
+            {
+                Console.Clear();
+                Program.MainMenu(ref cart, ref balance);
+            }
+            else
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("The term '" + userInput + "' is not recognized.");
+                Console.ResetColor();
+                Console.WriteLine();
+                Menu(ref cart, ref balance);
+            }
         }
     }
 
@@ -541,7 +586,7 @@ namespace SurvivalStore
             price = Price;
         }
 
-        public static void Menu(ref List<ShoppingCart> cart)
+        public static void Menu(ref List<ShoppingCart> cart, ref int balance)
         {
             string itemsInCart = null;
 
@@ -572,6 +617,7 @@ namespace SurvivalStore
                 Console.WriteLine("S - Shop Products");
             else
             {
+                Console.WriteLine("H - Checkout");
                 Console.WriteLine("C - Continue Shopping");
                 Console.WriteLine("R - Remove Product");
             }
@@ -585,16 +631,18 @@ namespace SurvivalStore
             if (userInput == "S" || userInput == "C")
             {
                 Console.Clear();
-                Products.Menu(ref cart);
+                Products.Menu(ref cart, ref balance);
             }
+            else if (userInput == "H")
+                Wallet.Menu(ref cart, ref balance);
             else if (userInput == "R")
             {
-                removeProductMenu(ref cart);
+                removeProductMenu(ref cart, ref balance);
             }
             else if (userInput == "M")
             {
                 Console.Clear();
-                Program.MainMenu(ref cart);
+                Program.MainMenu(ref cart, ref balance);
             }
             else
             {
@@ -603,11 +651,11 @@ namespace SurvivalStore
                 Console.WriteLine("The term '" + userInput + "' is not recognized.");
                 Console.ResetColor();
                 Console.WriteLine();
-                Menu(ref cart);
+                Menu(ref cart, ref balance);
             }
         }
 
-        public static void addProductMenu(ref List<ShoppingCart> cart)
+        public static void addProductMenu(ref List<ShoppingCart> cart, ref int balance)
         {
             Console.WriteLine("Add Product Menu");
             Console.WriteLine("------------------");
@@ -620,11 +668,11 @@ namespace SurvivalStore
             Console.WriteLine();
 
             if (userInput == "E")
-                addProduct(ref cart);
+                addProduct(ref cart, ref balance);
             else if (userInput == "G")
             {
                 Console.Clear();
-                Products.Menu(ref cart);
+                Products.Menu(ref cart, ref balance);
             }
             else
             {
@@ -633,11 +681,11 @@ namespace SurvivalStore
                 Console.WriteLine("The term '" + userInput + "' is not recognized.");
                 Console.ResetColor();
                 Console.WriteLine();
-                addProductMenu(ref cart);
+                addProductMenu(ref cart, ref balance);
             }
         }
 
-        public static void removeProductMenu(ref List<ShoppingCart> cart)
+        public static void removeProductMenu(ref List<ShoppingCart> cart, ref int balance)
         {
             Console.WriteLine("Remove Product Menu");
             Console.WriteLine("------------------");
@@ -650,11 +698,11 @@ namespace SurvivalStore
             Console.WriteLine();
 
             if (userInput == "E")
-                removeProduct(ref cart);
+                removeProduct(ref cart, ref balance);
             else if (userInput == "G")
             {
                 Console.Clear();
-                Menu(ref cart);
+                Menu(ref cart, ref balance);
             }
             else
             {
@@ -662,11 +710,11 @@ namespace SurvivalStore
                 Console.WriteLine("The term '" + userInput + "' is not recognized.");
                 Console.ResetColor();
                 Console.WriteLine();
-                removeProductMenu(ref cart);
+                removeProductMenu(ref cart, ref balance);
             }
         }
 
-        public static void addProduct(ref List<ShoppingCart> cart)
+        public static void addProduct(ref List<ShoppingCart> cart, ref int balance)
         {
             string itemFound = null;
 
@@ -694,7 +742,7 @@ namespace SurvivalStore
                         Console.WriteLine(Name + " added to cart.");
                         Console.ResetColor();
                         Console.WriteLine();
-                        Program.MainMenu(ref cart);
+                        Program.MainMenu(ref cart, ref balance);
                     }
                     else
                     {
@@ -702,7 +750,7 @@ namespace SurvivalStore
                         Console.WriteLine("Item not in stock.");
                         Console.ResetColor();
                         Console.WriteLine();
-                        addProductMenu(ref cart);
+                        addProductMenu(ref cart, ref balance);
                     }
 
                     break;
@@ -715,11 +763,11 @@ namespace SurvivalStore
                 Console.WriteLine("Item not found.");
                 Console.ResetColor();
                 Console.WriteLine();
-                addProductMenu(ref cart);
+                addProductMenu(ref cart, ref balance);
             }
         }
 
-        public static void removeProduct(ref List<ShoppingCart> cart)
+        public static void removeProduct(ref List<ShoppingCart> cart, ref int balance)
         {
             Console.Write("C:\\> Product ID: ");
             string userInput = Console.ReadLine();
@@ -737,7 +785,7 @@ namespace SurvivalStore
                     Console.ResetColor();
                     Console.WriteLine();
 
-                    ShoppingCart.Menu(ref cart);
+                    ShoppingCart.Menu(ref cart, ref balance);
                 }
                 else
                 {
@@ -745,11 +793,9 @@ namespace SurvivalStore
                     Console.WriteLine("Item not found.");
                     Console.ResetColor();
                     Console.WriteLine();
-                    removeProductMenu(ref cart);
+                    removeProductMenu(ref cart, ref balance);
                 }
             }
-
-            Program.MainMenu(ref cart);
         }
     }
 }
