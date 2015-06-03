@@ -575,112 +575,115 @@ namespace SurvivalStore
 
         public static void Menu(ref List<ShoppingCart> cart, ref double balance, ref string itemsInCart, ref double total)
         {
-            foreach (ShoppingCart item in cart)
+            while (true)
             {
-                itemsInCart = "found";
+                foreach (ShoppingCart item in cart)
+                {
+                    itemsInCart = "found";
 
-                Console.Write("Name:");
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("{0}", item.name);
-                Console.ResetColor();
-                Console.WriteLine("Product ID: {0}", item.product_ID);
-                Console.WriteLine("Price: {0:C2}", item.price);
-                Console.WriteLine();
+                    Console.Write("Name:");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("{0}", item.name);
+                    Console.ResetColor();
+                    Console.WriteLine("Product ID: {0}", item.product_ID);
+                    Console.WriteLine("Price: {0:C2}", item.price);
+                    Console.WriteLine();
+                }
 
-                total += item.price;
-            }
+                if (itemsInCart != null)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("Total: {0:C2}", total);
+                    Console.ResetColor();
+                    Console.WriteLine();
+                }
 
-            if (itemsInCart != null)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("Total: {0:C2}", total);
-                Console.ResetColor();
-                Console.WriteLine();
-            }
-
-            if (itemsInCart == null)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Cart is empty.");
-                Console.ResetColor();
-                Console.WriteLine();
-            }
-
-            Console.WriteLine("Cart Menu");
-            Console.WriteLine("------------------");
-            if (itemsInCart == null)
-                Console.WriteLine("S - Shop Products");
-            else
-            {
-                Console.WriteLine("H - Checkout");
-                Console.WriteLine("C - Continue Shopping");
-                Console.WriteLine("R - Remove Product");
-            }
-            Console.WriteLine("M - Main Menu");
-            Console.WriteLine();
-            Console.Write("C:\\> ");
-
-            string userInput = Console.ReadLine().ToUpper();
-            Console.WriteLine();
-
-            if (userInput == "S" || userInput == "C")
-            {
-                Console.Clear();
-                Products.Menu(ref cart, ref balance, ref itemsInCart, ref total);
-            }
-            else if (userInput == "H")
-            {
                 if (itemsInCart == null)
                 {
-                    Console.Clear();
-                    ShoppingCart.Menu(ref cart, ref balance, ref itemsInCart, ref total);
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("Cart is empty.");
+                    Console.ResetColor();
+                    Console.WriteLine();
                 }
+
+                Console.WriteLine("Cart Menu");
+                Console.WriteLine("------------------");
+                if (itemsInCart == null)
+                    Console.WriteLine("S - Shop Products");
                 else
                 {
-                    if (balance < total)
+                    Console.WriteLine("H - Checkout");
+                    Console.WriteLine("C - Continue Shopping");
+                    Console.WriteLine("R - Remove Product");
+                }
+                Console.WriteLine("M - Main Menu");
+                Console.WriteLine();
+                Console.Write("C:\\> ");
+
+                string userInput = Console.ReadLine().ToUpper();
+                Console.WriteLine();
+
+                if (userInput == "S" || userInput == "C")
+                {
+                    Console.Clear();
+                    Products.Menu(ref cart, ref balance, ref itemsInCart, ref total);
+                }
+                else if (userInput == "H")
+                {
+                    if (itemsInCart == null)
                     {
                         Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Purchase Declined.");
-                        Console.WriteLine("Insufficient Funds.");
-                        Console.ResetColor();
-                        Console.WriteLine();
-                        Menu(ref cart, ref balance, ref itemsInCart, ref total);
+                        //ShoppingCart.Menu(ref cart, ref balance, ref itemsInCart, ref total);
                     }
                     else
                     {
-                        balance -= total;
-                        total = 0;
-                        itemsInCart = null;
+                        if (balance < total)
+                        {
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Purchase Declined.");
+                            Console.WriteLine("Insufficient Funds.");
+                            Console.ResetColor();
+                            Console.WriteLine();
+                            //Menu(ref cart, ref balance, ref itemsInCart, ref total);
+                        }
+                        else
+                        {
+                            balance -= total;
+                            total = 0;
+                            itemsInCart = null;
 
-                        cart.Clear();
+                            cart.Clear();
 
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine("Items Purchased.");
-                        Console.ResetColor();
-                        Console.WriteLine();
-                        Program.MainMenu(ref cart, ref balance, ref itemsInCart, ref total);
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.WriteLine("Items Purchased.");
+                            Console.ResetColor();
+                            Console.WriteLine();
+                            return;
+                            //Program.MainMenu(ref cart, ref balance, ref itemsInCart, ref total);
+                        }
                     }
                 }
-            }
-            else if (userInput == "R")
-            {
-                removeProductMenu(ref cart, ref balance, ref itemsInCart, ref total);
-            }
-            else if (userInput == "M")
-            {
-                Console.Clear();
-                Program.MainMenu(ref cart, ref balance, ref itemsInCart, ref total);
-            }
-            else
-            {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("The term '" + userInput + "' is not recognized.");
-                Console.ResetColor();
-                Console.WriteLine();
-                Menu(ref cart, ref balance, ref itemsInCart, ref total);
+                else if (userInput == "R")
+                {
+                    removeProductMenu(ref cart, ref balance, ref itemsInCart, ref total);
+                }
+                else if (userInput == "M")
+                {
+                    Console.Clear();
+                    break;
+                    //Program.MainMenu(ref cart, ref balance, ref itemsInCart, ref total);
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The term '" + userInput + "' is not recognized.");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    //Menu(ref cart, ref balance, ref itemsInCart, ref total);
+                }
             }
         }
 
@@ -716,30 +719,39 @@ namespace SurvivalStore
 
         public static void removeProductMenu(ref List<ShoppingCart> cart, ref double balance, ref string itemsInCart, ref double total)
         {
-            Console.WriteLine("Remove Product Menu");
-            Console.WriteLine("------------------");
-            Console.WriteLine("E - Enter Product ID");
-            Console.WriteLine("G - Go Back");
-            Console.WriteLine();
-            Console.Write("C:\\> ");
-
-            string userInput = Console.ReadLine().ToUpper();
-            Console.WriteLine();
-
-            if (userInput == "E")
-                removeProduct(ref cart, ref balance, ref itemsInCart, ref total);
-            else if (userInput == "G")
+            while (true)
             {
-                Console.Clear();
-                Menu(ref cart, ref balance, ref itemsInCart, ref total);
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("The term '" + userInput + "' is not recognized.");
-                Console.ResetColor();
+                Console.WriteLine("Remove Product Menu");
+                Console.WriteLine("------------------");
+                Console.WriteLine("E - Enter Product ID");
+                Console.WriteLine("G - Go Back");
                 Console.WriteLine();
-                removeProductMenu(ref cart, ref balance, ref itemsInCart, ref total);
+                Console.Write("C:\\> ");
+
+                string userInput = Console.ReadLine().ToUpper();
+                Console.WriteLine();
+
+                if (userInput == "E")
+                {
+                    if (removeProduct(ref cart, ref balance, ref itemsInCart, ref total))
+                    {
+                        return;
+                    }
+                }
+                else if (userInput == "G")
+                {
+                    Console.Clear();
+                    return;
+                    //Menu(ref cart, ref balance, ref itemsInCart, ref total);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The term '" + userInput + "' is not recognized.");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    //removeProductMenu(ref cart, ref balance, ref itemsInCart, ref total);
+                }
             }
         }
 
@@ -766,6 +778,7 @@ namespace SurvivalStore
                         double Price = Convert.ToDouble(a.price);
                         ShoppingCart newItem = new ShoppingCart(Name, Product_ID, Price);
                         cart.Add(newItem);
+                        total += a.price;
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine(Name + " added to cart.");
@@ -796,7 +809,7 @@ namespace SurvivalStore
             }
         }
 
-        public static void removeProduct(ref List<ShoppingCart> cart, ref double balance, ref string itemsInCart, ref double total)
+        public static bool removeProduct(ref List<ShoppingCart> cart, ref double balance, ref string itemsInCart, ref double total)
         {
             Console.Write("C:\\> Product ID: ");
             string userInput = Console.ReadLine();
@@ -814,17 +827,21 @@ namespace SurvivalStore
                     Console.ResetColor();
                     Console.WriteLine();
 
-                    ShoppingCart.Menu(ref cart, ref balance, ref itemsInCart, ref total);
+                    return true;
+                    //ShoppingCart.Menu(ref cart, ref balance, ref itemsInCart, ref total);
                 }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Item not found.");
-                    Console.ResetColor();
-                    Console.WriteLine();
-                    removeProductMenu(ref cart, ref balance, ref itemsInCart, ref total);
-                }
+                //else
+                //{
+
+                //}
             }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Item not found.");
+            Console.ResetColor();
+            Console.WriteLine();
+            //removeProductMenu(ref cart, ref balance, ref itemsInCart, ref total);
+
+            return false;
         }
     }
 }
